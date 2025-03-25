@@ -26,30 +26,13 @@ jobs:
       - name: Build with Gradle
         run: |
           cd app
-          ./gradlew assembleRelease
-
-      - name: Decode Keystore
+          ./gradlew build
+        
+      - name: Create Debug APK
         run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > my-release-key.jks
-
-      - name: Sign APK
-        run: |
-          jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 \
-            -keystore my-release-key.jks \
-            -storepass ${{ secrets.KEYSTORE_PASSWORD }} \
-            -keypass ${{ secrets.KEYSTORE_PASSWORD }} \
-            app/app/build/outputs/apk/release/app-release-unsigned.apk \
-            ${{ secrets.KEY_ALIAS }}
-
-      - name: Verify APK Signature
-        run: |
-          jarsigner -verify -verbose -certs app/app/build/outputs/apk/release/app-release-unsigned.apk
-
-      - name: Zipalign APK
-        run: |
-          sudo apt-get install -y zipalign
-          zipalign -v 4 app/app/build/outputs/apk/release/app-release-unsigned.apk app/app/build/outputs/apk/release/app-release.apk
-
+          cd app
+          ./gradlew assembleDebug
+        
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -61,13 +44,13 @@ jobs:
           draft: false
           prerelease: false
           
-      - name: Upload Signed APK
+      - name: Upload Debug APK
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: app/app/build/outputs/apk/release/app-release.apk
-          asset_name: CodeforcesRecentActions-${{ github.ref_name }}.apk
-          asset_content_type: application/vnd.android.package-archive 
+          asset_path: app/build/outputs/apk/debug/app-debug.apk
+          asset_name: CodeforcesRecentActions-${{ github.ref_name }}-debug.apk
+          asset_content_type: application/vnd.android.package-archive
 
