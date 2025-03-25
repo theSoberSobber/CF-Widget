@@ -12,10 +12,11 @@ class RecentActionsRepository {
         return withContext(Dispatchers.IO) {
             try {
                 val response = apiService.getRecentActions()
-                if (response.status == "OK") {
-                    response.result
-                } else {
-                    emptyList()
+                val actions = response.recent_actions
+                
+                // Update each action to include a blogEntry for compatibility with the UI
+                actions.map { action ->
+                    action.copy(blogEntry = action.toBlogEntry())
                 }
             } catch (e: Exception) {
                 emptyList()

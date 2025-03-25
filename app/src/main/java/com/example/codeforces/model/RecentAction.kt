@@ -4,16 +4,38 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RecentActionsResponse(
-    val status: String,
-    val result: List<RecentAction>
+    val recent_actions: List<RecentAction>
 )
 
 @Serializable
 data class RecentAction(
-    val timeSeconds: Long,
-    val blogEntry: BlogEntry? = null,
-    val comment: Comment? = null
-)
+    val user: String,
+    val user_profile: String,
+    val user_color: String,
+    val blog_title: String,
+    val blog_link: String,
+    val img: ImageInfo? = null,
+    val otherImg: List<ImageInfo> = emptyList(),
+    val timeSeconds: Long = System.currentTimeMillis() / 1000,
+    val blogEntry: BlogEntry? = null
+) {
+    fun toBlogEntry(): BlogEntry {
+        return BlogEntry(
+            id = blog_link.split("/").lastOrNull()?.toIntOrNull() ?: 0,
+            originalLocale = "en",
+            creationTimeSeconds = timeSeconds,
+            authorHandle = user,
+            title = blog_title,
+            content = "",
+            locale = "en",
+            modificationTimeSeconds = timeSeconds,
+            allowViewHistory = false,
+            tags = emptyList(),
+            rating = 0,
+            url = blog_link
+        )
+    }
+}
 
 @Serializable
 data class BlogEntry(
@@ -42,6 +64,7 @@ data class Comment(
     val parentCommentId: Int? = null
 )
 
+@Serializable
 data class ImageInfo(
     val alt: String,
     val image: String

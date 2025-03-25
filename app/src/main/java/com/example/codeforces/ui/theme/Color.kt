@@ -60,12 +60,31 @@ val md_theme_dark_inversePrimary = Color(0xFF4051D5)
 val md_theme_dark_surfaceTint = Color(0xFFBDC2FF)
 
 // Codeforces user colors
-val Red = Color(0xFFFF3333)
-val Green = Color(0xFF00AA00)
-val Blue = Color(0xFF0000FF)
-val Cyan = Color(0xFF00CCCC)
-val Purple = Color(0xFF9900CC)
+val Red = Color(0xFFE74C3C)
+val Green = Color(0xFF2ECC71)
+val Blue = Color(0xFF3498DB)
+val Purple = Color(0xFF9B59B6)
 val Orange = Color(0xFFFF8C00)
-val Black = Color(0xFF000000)
-val Gray = Color(0xFF808080)
-val Legendary = Color(0xFFFF8C00) // Using orange for "legendary" color 
+val Black = Color(0xFF333333)
+val Gray = Color(0xFF95A5A6)
+val Legendary = Color(0xFFFF8C00) // Using orange for "legendary" color
+
+/**
+ * Gets the appropriate color for a Codeforces user based on their color string.
+ * 
+ * @param colorString The color string from the API (red, blue, green, etc.)
+ * @return The Color object corresponding to the user's rating color
+ */
+fun getCodeforcesUserColor(colorString: String): Color {
+    return when (colorString.lowercase()) {
+        "red" -> Red
+        "blue" -> Blue
+        "green" -> Green
+        "purple" -> Purple
+        "orange" -> Orange
+        "legendary" -> Legendary
+        "black" -> Black
+        "gray" -> Gray
+        else -> Black // Default color
+    }
+} 
