@@ -3,10 +3,10 @@ package com.example.codeforces.ui.theme
 import androidx.compose.ui.graphics.Color
 
 // Material 3 color palette
-val md_theme_light_primary = Color(0xFF4051D5)
+val md_theme_light_primary = Color(0xFFF44336)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
-val md_theme_light_primaryContainer = Color(0xFFE0E0FF)
-val md_theme_light_onPrimaryContainer = Color(0xFF00007B)
+val md_theme_light_primaryContainer = Color(0xFFFFDAD5)
+val md_theme_light_onPrimaryContainer = Color(0xFF410001)
 val md_theme_light_secondary = Color(0xFF5C5D72)
 val md_theme_light_onSecondary = Color(0xFFFFFFFF)
 val md_theme_light_secondaryContainer = Color(0xFFE1E0F9)
@@ -31,10 +31,10 @@ val md_theme_light_inverseSurface = Color(0xFF313034)
 val md_theme_light_inversePrimary = Color(0xFFBDC2FF)
 val md_theme_light_surfaceTint = Color(0xFF4051D5)
 
-val md_theme_dark_primary = Color(0xFFBDC2FF)
-val md_theme_dark_onPrimary = Color(0xFF0000BC)
-val md_theme_dark_primaryContainer = Color(0xFF2432E7)
-val md_theme_dark_onPrimaryContainer = Color(0xFFE0E0FF)
+val md_theme_dark_primary = Color(0xFFFF8A80)
+val md_theme_dark_onPrimary = Color(0xFF690002)
+val md_theme_dark_primaryContainer = Color(0xFFD32F2F)
+val md_theme_dark_onPrimaryContainer = Color(0xFFFFDAD5)
 val md_theme_dark_secondary = Color(0xFFC5C4DD)
 val md_theme_dark_onSecondary = Color(0xFF2F2F42)
 val md_theme_dark_secondaryContainer = Color(0xFF454559)
