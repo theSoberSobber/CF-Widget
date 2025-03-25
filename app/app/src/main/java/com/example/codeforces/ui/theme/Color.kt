@@ -65,9 +65,13 @@ val Green = Color(0xFF2ECC71)
 val Blue = Color(0xFF3498DB)
 val Purple = Color(0xFF9B59B6)
 val Orange = Color(0xFFFF8C00)
-val Black = Color(0xFF333333)
-val Gray = Color(0xFF95A5A6)
+val Black = Color(0xFFFFFFFF) // Changed to white for better visibility in dark mode
+val Gray = Color(0xFFC0C0C0)
 val Legendary = Color(0xFFFF8C00) // Using orange for "legendary" color
+val Cyan = Color(0xFF00CED1) // Added cyan color
+val Violet = Color(0xFF8A2BE2) // Added violet color
+val Admin = Color(0xFFFFFFFF) // Changed to white for better visibility in dark mode
+val Yellow = Color(0xFFFFD700) // Added yellow color
 
 /**
  * Gets the appropriate color for a Codeforces user based on their color string.
@@ -85,6 +89,10 @@ fun getCodeforcesUserColor(colorString: String): Color {
         "legendary" -> Legendary
         "black" -> Black
         "gray" -> Gray
+        "cyan" -> Cyan
+        "violet" -> Violet
+        "admin" -> Admin
+        "yellow" -> Yellow
         else -> Black // Default color
     }
 } 
