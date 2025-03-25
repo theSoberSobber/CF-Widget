@@ -25,71 +25,84 @@ import androidx.compose.ui.graphics.Color
 @Composable
 fun RecentActionsScreen(viewModel: RecentActionsViewModel) {
     val uiState by viewModel.uiState.collectAsState()
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val isFiltered by viewModel.isFiltered.collectAsState()
     val isRefreshing = uiState is RecentActionsViewModel.UiState.Loading
     val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = isRefreshing)
     val context = LocalContext.current
 
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            Surface(
-                color = MaterialTheme.colorScheme.primary,
-                shadowElevation = 8.dp,
-                tonalElevation = 4.dp
-            ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 8.dp, bottom = 8.dp)
-                ) {
-                    CodeforcesTopAppBar(
-                        onRefresh = { viewModel.loadRecentActions() },
-                        scrollBehavior = scrollBehavior
-                    )
-                }
-            }
-        },
         containerColor = MaterialTheme.colorScheme.background
     ) { paddingValues ->
-        SwipeRefresh(
-            state = swipeRefreshState,
-            onRefresh = { viewModel.loadRecentActions() },
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            Box(
+            // Filtered mode toggle
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "Filtered Mode",
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                    Switch(
+                        checked = isFiltered,
+                        onCheckedChange = { viewModel.toggleFilteredMode() }
+                    )
+                }
+                Text(
+                    text = "In filtered mode, only selected quality blogs will be shown",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(top = 4.dp)
+                )
+            }
+
+            SwipeRefresh(
+                state = swipeRefreshState,
+                onRefresh = { viewModel.loadRecentActions() },
                 modifier = Modifier.fillMaxSize()
             ) {
-                when (val state = uiState) {
-                    is RecentActionsViewModel.UiState.Loading -> {
-                        if (!swipeRefreshState.isRefreshing) {
-                            CircularProgressIndicator(
-                                modifier = Modifier.align(Alignment.Center)
-                            )
+                Box(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    when (val state = uiState) {
+                        is RecentActionsViewModel.UiState.Loading -> {
+                            if (!swipeRefreshState.isRefreshing) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.align(Alignment.Center)
+                                )
+                            }
                         }
-                    }
-                    is RecentActionsViewModel.UiState.Success -> {
-                        if (state.data.isEmpty()) {
-                            EmptyState(
+                        is RecentActionsViewModel.UiState.Success -> {
+                            if (state.data.isEmpty()) {
+                                EmptyState(
+                                    onRetry = { viewModel.loadRecentActions() }
+                                )
+                            } else {
+                                ContentList(
+                                    data = state.data,
+                                    onItemClick = { url ->
+                                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                                        context.startActivity(intent)
+                                    }
+                                )
+                            }
+                        }
+                        is RecentActionsViewModel.UiState.Error -> {
+                            ErrorState(
+                                message = state.message,
                                 onRetry = { viewModel.loadRecentActions() }
                             )
-                        } else {
-                            ContentList(
-                                data = state.data,
-                                onItemClick = { url ->
-                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                                    context.startActivity(intent)
-                                }
-                            )
                         }
-                    }
-                    is RecentActionsViewModel.UiState.Error -> {
-                        ErrorState(
-                            message = state.message,
-                            onRetry = { viewModel.loadRecentActions() }
-                        )
                     }
                 }
             }
@@ -176,13 +189,11 @@ private fun CodeforcesTopAppBar(
             ) {
                 Text(
                     text = "Codeforces ",
-                    style = MaterialTheme.typography.titleLarge,
-                    color = Color.White
+                    style = MaterialTheme.typography.titleLarge
                 )
                 Text(
                     text = "Recent Actions",
-                    style = MaterialTheme.typography.titleLarge,
-                    color = Color.White
+                    style = MaterialTheme.typography.titleLarge
                 )
             }
         },
@@ -190,8 +201,8 @@ private fun CodeforcesTopAppBar(
             Button(
                 onClick = onRefresh,
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.White,
-                    contentColor = MaterialTheme.colorScheme.primary
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                 ),
                 modifier = Modifier.padding(end = 8.dp)
             ) {
