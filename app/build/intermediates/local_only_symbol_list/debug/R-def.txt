@@ -5,7 +5,7 @@ drawable ic_launcher_foreground
 drawable ic_refresh
 drawable necropost
 drawable new_comments
-drawable text_updated
+drawable text_created_or_updated
 drawable widget_preview
 mipmap ic_launcher
 mipmap ic_launcher_round
@@ -20,3 +20,4 @@ style Theme.CodeforcesRecentActions
 xml backup_rules
 xml codeforces_widget_info
 xml data_extraction_rules
+xml network_security_config

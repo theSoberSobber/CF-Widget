@@ -19,6 +19,7 @@ import com.example.codeforces.ui.components.RecentActionItem
 import com.example.codeforces.viewmodel.RecentActionsViewModel
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import androidx.compose.ui.graphics.Color
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -32,11 +33,24 @@ fun RecentActionsScreen(viewModel: RecentActionsViewModel) {
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            CodeforcesTopAppBar(
-                onRefresh = { viewModel.loadRecentActions() },
-                scrollBehavior = scrollBehavior
-            )
-        }
+            Surface(
+                color = MaterialTheme.colorScheme.primary,
+                shadowElevation = 8.dp,
+                tonalElevation = 4.dp
+            ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp, bottom = 8.dp)
+                ) {
+                    CodeforcesTopAppBar(
+                        onRefresh = { viewModel.loadRecentActions() },
+                        scrollBehavior = scrollBehavior
+                    )
+                }
+            }
+        },
+        containerColor = MaterialTheme.colorScheme.background
     ) { paddingValues ->
         SwipeRefresh(
             state = swipeRefreshState,
@@ -163,11 +177,12 @@ private fun CodeforcesTopAppBar(
                 Text(
                     text = "Codeforces ",
                     style = MaterialTheme.typography.titleLarge,
-                    color = MaterialTheme.colorScheme.primary
+                    color = Color.White
                 )
                 Text(
                     text = "Recent Actions",
-                    style = MaterialTheme.typography.titleLarge
+                    style = MaterialTheme.typography.titleLarge,
+                    color = Color.White
                 )
             }
         },
@@ -175,8 +190,8 @@ private fun CodeforcesTopAppBar(
             Button(
                 onClick = onRefresh,
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                    containerColor = Color.White,
+                    contentColor = MaterialTheme.colorScheme.primary
                 ),
                 modifier = Modifier.padding(end = 8.dp)
             ) {

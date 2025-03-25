@@ -148,7 +148,7 @@ int drawable notification_template_icon_bg 0x7f06002b
 int drawable notification_template_icon_low_bg 0x7f06002c
 int drawable notification_tile_bg 0x7f06002d
 int drawable notify_panel_notification_icon_bg 0x7f06002e
-int drawable text_updated 0x7f06002f
+int drawable text_created_or_updated 0x7f06002f
 int drawable widget_preview 0x7f060030
 int id accessibility_action_clickable_span 0x7f070000
 int id accessibility_custom_action_0 0x7f070001
@@ -1684,3 +1684,4 @@ int styleable StateListDrawableItem_android_drawable 0
 int xml backup_rules 0x7f100000
 int xml codeforces_widget_info 0x7f100001
 int xml data_extraction_rules 0x7f100002
+int xml network_security_config 0x7f100003
