@@ -15,6 +15,8 @@
     <string msgid="4057925834421392736" name="dialog">"کادر گفتگو"</string>
     <string msgid="1890207353314751437" name="dropdown_menu">"منوی کرکره‌ای"</string>
     <string msgid="5974471714631304645" name="expanded">"ازهم بازشده"</string>
+    <string msgid="2863935784364843033" name="glance_error_layout_text">"‏بااستفاده از "<b><tt>"adb logcat"</tt></b>" و جستجوی "<b><tt>"GlanceAppWidget"</tt></b>"، خطا را به‌طور دقیق بررسی کنید"</string>
+    <string msgid="3631961919234443531" name="glance_error_layout_title">"‏"<b>"خطا در ابزارک برنامه Glance"</b></string>
     <string msgid="6827826412747255547" name="in_progress">"درحال انجام"</string>
     <string msgid="7933458017204019916" name="indeterminate">"برخی موارد علامت‌گذاری شده است"</string>
     <string msgid="542007171693138492" name="navigation_menu">"منوی پیمایش"</string>

@@ -22,13 +22,16 @@ class RecentActionsViewModel : ViewModel() {
     fun loadRecentActions() {
         viewModelScope.launch {
             _uiState.value = UiState.Loading
-            repository.getRecentActions()
-                .onSuccess { actions ->
+            try {
+                val actions = repository.getRecentActions()
+                if (actions.isNotEmpty()) {
                     _uiState.value = UiState.Success(actions)
+                } else {
+                    _uiState.value = UiState.Error("No recent actions found")
                 }
-                .onFailure { error ->
-                    _uiState.value = UiState.Error(error.message ?: "Unknown error")
-                }
+            } catch (e: Exception) {
+                _uiState.value = UiState.Error(e.message ?: "Unknown error")
+            }
         }
     }
 

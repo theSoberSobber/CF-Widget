@@ -15,6 +15,8 @@
     <string msgid="4057925834421392736" name="dialog">"ប្រអប់"</string>
     <string msgid="1890207353314751437" name="dropdown_menu">"ម៉ឺនុយធ្លាក់ចុះ"</string>
     <string msgid="5974471714631304645" name="expanded">"បាន​ពង្រីក"</string>
+    <string msgid="2863935784364843033" name="glance_error_layout_text">"ពិនិត្យមើល​បញ្ហាជាក់លាក់​ដោយប្រើ "<b><tt>"adb logcat"</tt></b>", កំពុង​ស្វែងរក "<b><tt>"GlanceAppWidget"</tt></b></string>
+    <string msgid="3631961919234443531" name="glance_error_layout_title"><b>"បញ្ហា​ពាក់ព័ន្ធនឹង​ធាតុក្រាហ្វិក​កម្មវិធី​មើលមួយភ្លែត"</b></string>
     <string msgid="6827826412747255547" name="in_progress">"កំពុងដំណើរការ"</string>
     <string msgid="7933458017204019916" name="indeterminate">"បានធីកខ្លះ"</string>
     <string msgid="542007171693138492" name="navigation_menu">"ម៉ឺនុយរុករក"</string>

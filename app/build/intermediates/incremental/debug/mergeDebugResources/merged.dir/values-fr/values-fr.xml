@@ -15,6 +15,8 @@
     <string msgid="4057925834421392736" name="dialog">"Boîte de dialogue"</string>
     <string msgid="1890207353314751437" name="dropdown_menu">"Menu déroulant"</string>
     <string msgid="5974471714631304645" name="expanded">"Développé"</string>
+    <string msgid="2863935784364843033" name="glance_error_layout_text">"Vous pouvez utiliser "<b><tt>"adb logcat"</tt></b>" pour connaître l\'erreur exacte lorsque vous recherchez "<b><tt>"GlanceAppWidget"</tt></b></string>
+    <string msgid="3631961919234443531" name="glance_error_layout_title"><b>"Erreur du widget de l\'appli Aperçu"</b></string>
     <string msgid="6827826412747255547" name="in_progress">"En cours"</string>
     <string msgid="7933458017204019916" name="indeterminate">"Partiellement coché"</string>
     <string msgid="542007171693138492" name="navigation_menu">"Menu de navigation"</string>

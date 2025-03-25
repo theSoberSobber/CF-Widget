@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Codeforces Recent Actions</string>
+    <string name="widget_name">CF Blogs</string>
+    <string name="widget_description">Displays recent Codeforces blog posts</string>
+    <string name="widget_loading">Loading…</string>
+    <string name="widget_empty">No recent actions found</string>
+    <string name="widget_error">Error loading data</string>
+    <string name="widget_refresh">Refresh</string>
 </resources> 

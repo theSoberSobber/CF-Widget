@@ -8,13 +8,17 @@ import kotlinx.coroutines.withContext
 class RecentActionsRepository {
     private val apiService = RetrofitClient.apiService
 
-    suspend fun getRecentActions(): Result<List<RecentAction>> {
+    suspend fun getRecentActions(): List<RecentAction> {
         return withContext(Dispatchers.IO) {
             try {
                 val response = apiService.getRecentActions()
-                Result.success(response.recent_actions)
+                if (response.status == "OK") {
+                    response.result
+                } else {
+                    emptyList()
+                }
             } catch (e: Exception) {
-                Result.failure(e)
+                emptyList()
             }
         }
     }

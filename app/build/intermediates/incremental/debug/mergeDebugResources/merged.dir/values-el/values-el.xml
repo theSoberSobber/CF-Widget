@@ -15,6 +15,8 @@
     <string msgid="4057925834421392736" name="dialog">"Παράθυρο διαλόγου"</string>
     <string msgid="1890207353314751437" name="dropdown_menu">"Αναπτυσσόμενο μενού"</string>
     <string msgid="5974471714631304645" name="expanded">"Ανεπτυγμένο"</string>
+    <string msgid="2863935784364843033" name="glance_error_layout_text">"Ελέγξτε το ακριβές σφάλμα χρησιμοποιώντας το "<b><tt>"adb logcat"</tt></b>" και αναζητώντας το στοιχείο "<b><tt>"GlanceAppWidget"</tt></b></string>
+    <string msgid="3631961919234443531" name="glance_error_layout_title"><b>"Σφάλμα γραφικού στοιχείου εφαρμογής Glance"</b></string>
     <string msgid="6827826412747255547" name="in_progress">"Σε εξέλιξη"</string>
     <string msgid="7933458017204019916" name="indeterminate">"Έγινε μερικός έλεγχος"</string>
     <string msgid="542007171693138492" name="navigation_menu">"Μενού πλοήγησης"</string>

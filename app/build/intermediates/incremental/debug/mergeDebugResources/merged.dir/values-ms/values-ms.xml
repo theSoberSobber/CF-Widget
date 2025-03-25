@@ -15,6 +15,8 @@
     <string msgid="4057925834421392736" name="dialog">"Dialog"</string>
     <string msgid="1890207353314751437" name="dropdown_menu">"Menu lungsur"</string>
     <string msgid="5974471714631304645" name="expanded">"Dikembangkan"</string>
+    <string msgid="2863935784364843033" name="glance_error_layout_text">"Semak ralat sebenar menggunakan "<b><tt>"adb logcat"</tt></b>" semasa mencari "<b><tt>"GlanceAppWidget"</tt></b></string>
+    <string msgid="3631961919234443531" name="glance_error_layout_title"><b>"Ralat Widget Apl Glance"</b></string>
     <string msgid="6827826412747255547" name="in_progress">"Dalam proses"</string>
     <string msgid="7933458017204019916" name="indeterminate">"Sebahagiannya ditandai"</string>
     <string msgid="542007171693138492" name="navigation_menu">"Menu navigasi"</string>

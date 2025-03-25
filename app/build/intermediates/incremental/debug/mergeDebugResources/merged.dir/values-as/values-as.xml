@@ -15,6 +15,8 @@
     <string msgid="4057925834421392736" name="dialog">"ডায়ল’গ"</string>
     <string msgid="1890207353314751437" name="dropdown_menu">"ড্ৰপডাউনৰ মেনু"</string>
     <string msgid="5974471714631304645" name="expanded">"বিস্তাৰ কৰা আছে"</string>
+    <string msgid="2863935784364843033" name="glance_error_layout_text"><b><tt>"GlanceAppWidget"</tt></b>" বিচৰা সময়ত "<b><tt>"adb logcat"</tt></b>" ব্যৱহাৰ কৰি সঠিক আসোঁৱাহটো পৰীক্ষা কৰক"</string>
+    <string msgid="3631961919234443531" name="glance_error_layout_title"><b>"Glance এপৰ ৱিজেটৰ আসোঁৱাহ"</b></string>
     <string msgid="6827826412747255547" name="in_progress">"প্ৰক্ৰিয়াকৰণ কৰি থকা হৈছে"</string>
     <string msgid="7933458017204019916" name="indeterminate">"আংশিকভাৱে পৰীক্ষা কৰা হৈছে"</string>
     <string msgid="542007171693138492" name="navigation_menu">"নেভিগেশ্বন মেনু"</string>
