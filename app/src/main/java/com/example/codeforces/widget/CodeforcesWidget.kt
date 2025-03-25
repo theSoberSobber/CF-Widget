@@ -13,38 +13,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.glance.GlanceId
-import androidx.glance.GlanceModifier
-import androidx.glance.action.ActionParameters
-import androidx.glance.action.clickable
-import androidx.glance.appwidget.GlanceAppWidget
-import androidx.glance.appwidget.GlanceAppWidgetManager
-import androidx.glance.appwidget.GlanceAppWidgetReceiver
-import androidx.glance.appwidget.action.ActionCallback
-import androidx.glance.appwidget.action.actionRunCallback
-import androidx.glance.appwidget.action.actionStartActivity
-import androidx.glance.appwidget.lazy.LazyColumn
-import androidx.glance.appwidget.lazy.items
-import androidx.glance.appwidget.provideContent
-import androidx.glance.appwidget.state.updateAppWidgetState
-import androidx.glance.appwidget.updateAll
-import androidx.glance.background
-import androidx.glance.currentState
-import androidx.glance.layout.Alignment
-import androidx.glance.layout.Box
-import androidx.glance.layout.Column
-import androidx.glance.layout.Row
-import androidx.glance.layout.Spacer
-import androidx.glance.layout.fillMaxSize
-import androidx.glance.layout.fillMaxWidth
-import androidx.glance.layout.height
-import androidx.glance.layout.padding
-import androidx.glance.layout.size
-import androidx.glance.state.GlanceStateDefinition
-import androidx.glance.state.PreferencesGlanceStateDefinition
-import androidx.glance.text.FontWeight
-import androidx.glance.text.Text
-import androidx.glance.text.TextStyle
+import androidx.glance.*
+import androidx.glance.action.*
+import androidx.glance.appwidget.*
+import androidx.glance.appwidget.action.*
+import androidx.glance.appwidget.lazy.*
+import androidx.glance.appwidget.state.*
+import androidx.glance.color.*
+import androidx.glance.layout.*
+import androidx.glance.state.*
+import androidx.glance.text.*
+import com.example.codeforces.R
 import com.example.codeforces.model.RecentAction
 import com.example.codeforces.repository.RecentActionsRepository
 import com.example.codeforces.ui.theme.getCodeforcesUserColor
@@ -123,7 +102,7 @@ private fun WidgetContent(
     Box(
         modifier = GlanceModifier
             .fillMaxSize()
-            .background(Color(0xFFF5F5F5))
+            .background(ColorProvider(day = Color(0xFFF5F5F5), night = Color(0xFF121212)))
     ) {
         Column(
             modifier = GlanceModifier.fillMaxSize()
@@ -203,16 +182,15 @@ private fun WidgetContent(
 }
 
 @Composable
-private fun WidgetBlogItem(action: RecentAction) {
-    val blogUrl = "https://codeforces.com${action.blog_link}"
-    val userColor = getCodeforcesUserColor(action.user_color)
+private fun WidgetBlogItem(blog: RecentAction) {
+    val userColor = getCodeforcesUserColor(blog.user_color)
+    val blogUrl = "https://codeforces.com${blog.blog_link}"
     
-    // Create blog item with rounded corners and shadow
     Box(
         modifier = GlanceModifier
             .fillMaxWidth()
             .padding(vertical = 4.dp)
-            .background(Color(0xFFFFFFFF))
+            .background(ColorProvider(day = Color(0xFFFFFFFF), night = Color(0xFF121212)))
             .padding(8.dp)
             .clickable(
                 actionStartActivity(
@@ -221,48 +199,77 @@ private fun WidgetBlogItem(action: RecentAction) {
             )
     ) {
         Row(
+            modifier = GlanceModifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // User avatar (placeholder circle)
-            Box(
-                modifier = GlanceModifier
-                    .size(32.dp)
-                    .background(userColor)
-            ) {
-                Text(
-                    text = action.user.firstOrNull()?.uppercase() ?: "U",
-                    style = TextStyle(
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold
-                    ),
-                    modifier = GlanceModifier.padding(8.dp)
-                )
-            }
+            // Use PNG images based on alt text
+            blog.img?.let { imageInfo ->
+                when (imageInfo.alt) {
+                    "Necropost" -> Image(
+                        provider = ImageProvider(R.drawable.necropost),
+                        contentDescription = "Necropost",
+                        modifier = GlanceModifier.size(24.dp)
+                    )
+                    "Text created or updated" -> Image(
+                        provider = ImageProvider(R.drawable.text_created_or_updated),
+                        contentDescription = "Text created or updated",
+                        modifier = GlanceModifier.size(24.dp)
+                    )
+                    "New comment(s)" -> Image(
+                        provider = ImageProvider(R.drawable.new_comments),
+                        contentDescription = "New comment(s)",
+                        modifier = GlanceModifier.size(24.dp)
+                    )
+                    else -> Text(
+                        text = imageInfo.alt,
+                        style = TextStyle(
+                            color = ColorProvider(day = Color(0xFF000000), night = Color(0xFFFFFFFF)),
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Bold
+                        ),
+                        modifier = GlanceModifier.padding(end = 8.dp)
+                    )
+                }
+            } ?: Text(
+                text = "no-img",
+                style = TextStyle(
+                    color = ColorProvider(day = Color(0xFF000000), night = Color(0xFFFFFFFF)),
+                    fontSize = 12.sp
+                ),
+                modifier = GlanceModifier.padding(end = 8.dp)
+            )
             
-            // Text content
             Column(
                 modifier = GlanceModifier
                     .defaultWeight()
                     .padding(start = 8.dp)
             ) {
-                // Blog title
                 Text(
-                    text = action.blog_title,
+                    text = blog.blog_title,
                     style = TextStyle(
+                        color = ColorProvider(day = Color(0xFF000000), night = Color(0xFFFFFFFF)),
                         fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Medium
                     ),
-                    maxLines = 1
+                    maxLines = 2
                 )
-                
-                // Username with color
-                Text(
-                    text = "by ${action.user}",
-                    style = TextStyle(
-                        fontSize = 12.sp
-                    ),
-                    maxLines = 1
-                )
+                Row {
+                    Text(
+                        text = "by ",
+                        style = TextStyle(
+                            color = ColorProvider(day = Color(0xFF666666), night = Color(0xFFAAAAAA)),
+                            fontSize = 12.sp
+                        )
+                    )
+                    Text(
+                        text = blog.user,
+                        style = TextStyle(
+                            color = ColorProvider(day = userColor, night = userColor),
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                }
             }
         }
     }
