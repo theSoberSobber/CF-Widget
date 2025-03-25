@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Codeforces Recent Actions</string>
+    <string name="app_name">Codeforces Blog Widget</string>
     <string name="widget_name">CF Blogs</string>
     <string name="widget_description">Displays recent Codeforces blog posts</string>
     <string name="widget_loading">Loading…</string>

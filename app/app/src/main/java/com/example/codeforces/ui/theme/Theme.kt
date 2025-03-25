@@ -77,7 +77,7 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 @Composable
-fun CodeforcesRecentActionsTheme(
+fun CodeforcesBlogWidgetTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit

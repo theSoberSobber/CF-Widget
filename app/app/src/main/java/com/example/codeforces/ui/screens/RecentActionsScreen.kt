@@ -192,7 +192,7 @@ private fun CodeforcesTopAppBar(
                     style = MaterialTheme.typography.titleLarge
                 )
                 Text(
-                    text = "Recent Actions",
+                    text = "Blog Widget",
                     style = MaterialTheme.typography.titleLarge
                 )
             }

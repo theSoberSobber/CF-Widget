@@ -11,7 +11,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.codeforces.ui.screens.RecentActionsScreen
-import com.example.codeforces.ui.theme.CodeforcesRecentActionsTheme
+import com.example.codeforces.ui.theme.CodeforcesBlogWidgetTheme
 import com.example.codeforces.viewmodel.RecentActionsViewModel
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
         handleIntent(intent)
         
         setContent {
-            CodeforcesRecentActionsTheme {
+            CodeforcesBlogWidgetTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -57,7 +57,15 @@ class MainActivity : ComponentActivity() {
     }
     
     private fun openBlogPost(url: String) {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse(url)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+            addCategory(Intent.CATEGORY_BROWSABLE)
+            addCategory(Intent.CATEGORY_DEFAULT)
+        }
         startActivity(intent)
+        finish()
     }
 } 

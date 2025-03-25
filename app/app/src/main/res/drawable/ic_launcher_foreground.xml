@@ -3,14 +3,44 @@
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
-    android:viewportHeight="108"
-    android:tint="#6650a4">
-  <group android:scaleX="2.61"
-      android:scaleY="2.61"
-      android:translateX="22.68"
-      android:translateY="22.68">
-    <path
-        android:fillColor="@android:color/white"
-        android:pathData="M12,21.35l-1.45,-1.32C5.4,15.36 2,12.28 2,8.5 2,5.42 4.42,3 7.5,3c1.74,0 3.41,0.81 4.5,2.09C13.09,3.81 14.76,3 16.5,3 19.58,3 22,5.42 22,8.5c0,3.78 -3.4,6.86 -8.55,11.54L12,21.35z"/>
-  </group>
+    android:viewportHeight="108">
+    
+    <!-- Pixelated Dog Design -->
+    <group
+        android:scaleX="0.85"
+        android:scaleY="0.85"
+        android:translateX="8.1"
+        android:translateY="8.1">
+        
+        <!-- Head -->
+        <path
+            android:fillColor="#795548"
+            android:pathData="M45,35 L65,35 L65,65 L45,65 Z" />
+            
+        <!-- Ears -->
+        <path
+            android:fillColor="#795548"
+            android:pathData="M40,30 L50,30 L50,40 L40,40 Z" />
+        <path
+            android:fillColor="#795548"
+            android:pathData="M60,30 L70,30 L70,40 L60,40 Z" />
+            
+        <!-- Eyes -->
+        <path
+            android:fillColor="#000000"
+            android:pathData="M50,45 L55,45 L55,50 L50,50 Z" />
+        <path
+            android:fillColor="#000000"
+            android:pathData="M55,45 L60,45 L60,50 L55,50 Z" />
+            
+        <!-- Nose -->
+        <path
+            android:fillColor="#000000"
+            android:pathData="M52,55 L58,55 L58,60 L52,60 Z" />
+            
+        <!-- Mouth -->
+        <path
+            android:fillColor="#5D4037"
+            android:pathData="M50,60 L60,60 L60,62 L50,62 Z" />
+    </group>
 </vector> 
