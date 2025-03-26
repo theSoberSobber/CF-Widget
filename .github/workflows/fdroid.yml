@@ -1,0 +1,28 @@
+name: Prepare F-Droid Branch
+
+on:
+  workflow_dispatch:
+
+jobs:
+  prepare-fdroid:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Remove Unnecessary Files
+        run: |
+          shopt -s extglob
+          mv app /tmp/app_backup
+          rm -rf !(app)
+          mv /tmp/app_backup app
+
+      - name: Commit and Push to fdroid Branch
+        run: |
+          git config --global user.name "theSoberSobber"
+          git config --global user.email "pavitchhabra1611@gmail.com"
+          git checkout -B fdroid
+          git add .
+          git commit -m "Prepare F-Droid branch: Keep only app directory"
+          git push origin fdroid --force
