@@ -11,20 +11,25 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Move App Contents to Root and Clean Up
+      - name: Remove Everything Except App, Screenshots, README, and LICENSE
         run: |
-          # Remove GitHub Actions workflow folder
-          rm -rf .github  
+          shopt -s extglob  # Enable pattern matching
           
-          # Remove .gitignore if present
-          rm -f .gitignore  
+          # Move required files to a safe location
+          mkdir /tmp/keep
+          mv app screenshots README.md LICENSE /tmp/keep/ 2>/dev/null || true
           
-          # Move all files and hidden files from app/ to root
-          shopt -s dotglob nullglob  # Enable moving hidden files
-          mv app/* app/.* . || true  # Ignore errors if no hidden files exist
+          # Delete everything in the repo
+          rm -rf * .[^.]* 2>/dev/null || true
           
-          # Remove the now-empty app directory
-          rm -rf app  
+          # Move app contents to root
+          mv /tmp/keep/app/* /tmp/keep/app/.* . 2>/dev/null || true
+          
+          # Restore screenshots, README.md, and LICENSE
+          mv /tmp/keep/screenshots /tmp/keep/README.md /tmp/keep/LICENSE . 2>/dev/null || true
+          
+          # Remove temporary app folder
+          rm -rf /tmp/keep/app /tmp/keep
 
       - name: Commit and Push to fdroid Branch
         run: |
@@ -32,5 +37,5 @@ jobs:
           git config --global user.email "pavitchhabra1611@gmail.com"
           git checkout -B fdroid
           git add .
-          git commit -m "Prepare F-Droid branch: Move app to root and clean up"
+          git commit -m "Prepare F-Droid branch: Keep only app, screenshots, README.md, and LICENSE"
           git push origin fdroid --force
