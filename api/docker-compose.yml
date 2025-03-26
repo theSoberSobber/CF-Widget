@@ -1,13 +1,31 @@
+version: '3.8'
 services:
-  scraper-api:
+  api:
     build: .
     ports:
       - "8001:8001"
     volumes:
       - ./output:/app/output
+    depends_on:
+      - ollama
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8001/api/health"]
       interval: 30s
       timeout: 10s
-      retries: 3 
+      retries: 3
+
+  ollama:
+    image: alpine/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  ollama_data: 

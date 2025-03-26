@@ -1,2 +1,16 @@
-__pycache__
+# Python
+__pycache__/
+*.pyc
+
+# Model files and cache
+.cache/
+models/
+*.bin
+*.pt
+*.pth
+*.safetensors
+transformers_cache/
+
+# Project specific
 output
+*.json
