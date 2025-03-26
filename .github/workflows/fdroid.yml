@@ -1,7 +1,7 @@
 name: Prepare F-Droid Branch
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:  # Allows manual trigger
 
 jobs:
   prepare-fdroid:
@@ -13,10 +13,18 @@ jobs:
 
       - name: Move App Contents to Root and Clean Up
         run: |
-          rm -rf .github  # Remove GitHub Actions folder
-          rm -f .gitignore  # Remove .gitignore if present
-          mv app/* .  # Move all files inside app/ to the root
-          rm -rf app  # Remove the now-empty app directory
+          # Remove GitHub Actions workflow folder
+          rm -rf .github  
+          
+          # Remove .gitignore if present
+          rm -f .gitignore  
+          
+          # Move all files and hidden files from app/ to root
+          shopt -s dotglob nullglob  # Enable moving hidden files
+          mv app/* app/.* . || true  # Ignore errors if no hidden files exist
+          
+          # Remove the now-empty app directory
+          rm -rf app  
 
       - name: Commit and Push to fdroid Branch
         run: |
