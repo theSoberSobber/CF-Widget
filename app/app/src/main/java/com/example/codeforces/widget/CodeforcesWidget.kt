@@ -54,6 +54,8 @@ class CodeforcesWidget : GlanceAppWidget() {
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         val settingsDataStore = SettingsDataStore(context)
         val isFiltered = settingsDataStore.isFilteredMode.first()
+        val colorFilter = settingsDataStore.colorFilter.first()
+        val showUnrated = settingsDataStore.showUnrated.first()
 
         provideContent {
             val prefs = currentState<Preferences>()
@@ -67,7 +69,11 @@ class CodeforcesWidget : GlanceAppWidget() {
                 try {
                     val actions = Json.decodeFromString<List<RecentAction>>(recentActionsJson)
                     android.util.Log.d("CodeforcesWidget", "Widget rendering - Decoded ${actions.size} actions")
-                    actions
+                    if (colorFilter != null) {
+                        filterActionsByColor(actions, colorFilter, showUnrated)
+                    } else {
+                        actions
+                    }
                 } catch (e: Exception) {
                     android.util.Log.e("CodeforcesWidget", "Widget rendering - Error decoding JSON", e)
                     emptyList()
@@ -81,6 +87,28 @@ class CodeforcesWidget : GlanceAppWidget() {
                 recentActions = recentActions,
                 lastUpdate = lastUpdate
             )
+        }
+    }
+    
+    private fun filterActionsByColor(actions: List<RecentAction>, selectedColor: String, showUnrated: Boolean): List<RecentAction> {
+        val colorHierarchy = listOf("gray", "green", "cyan", "blue", "violet", "yellow")
+        val selectedIndex = colorHierarchy.indexOf(selectedColor.lowercase())
+        if (selectedIndex == -1) return actions // If color not in hierarchy, show all
+
+        return actions.filter { action ->
+            val actionColor = action.user_color.lowercase()
+            // Handle unrated/announcement content
+            if (actionColor == "admin" || actionColor == "black") {
+                showUnrated
+            } else {
+                // If color is not in hierarchy (above our hierarchy), show it
+                if (!colorHierarchy.contains(actionColor)) {
+                    true
+                } else {
+                    val actionIndex = colorHierarchy.indexOf(actionColor)
+                    actionIndex >= selectedIndex // Include the selected color and above
+                }
+            }
         }
     }
     

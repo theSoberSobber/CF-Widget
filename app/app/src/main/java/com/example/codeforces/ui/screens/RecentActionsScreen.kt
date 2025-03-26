@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
@@ -26,6 +27,8 @@ import androidx.compose.ui.graphics.Color
 fun RecentActionsScreen(viewModel: RecentActionsViewModel) {
     val uiState by viewModel.uiState.collectAsState()
     val isFiltered by viewModel.isFiltered.collectAsState()
+    val selectedColor by viewModel.selectedColor.collectAsState()
+    val showUnrated by viewModel.showUnrated.collectAsState()
     val isRefreshing = uiState is RecentActionsViewModel.UiState.Loading
     val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = isRefreshing)
     val context = LocalContext.current
@@ -59,12 +62,95 @@ fun RecentActionsScreen(viewModel: RecentActionsViewModel) {
                     )
                 }
                 Text(
-                    text = "In filtered mode, only selected quality blogs will be shown",
+                    text = "In filtered mode, blogs are filtered by an LLM to show only quality content",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(top = 4.dp)
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "Show Unrated & Announcements",
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                    Switch(
+                        checked = showUnrated,
+                        onCheckedChange = { viewModel.toggleShowUnrated() }
+                    )
+                }
+                Text(
+                    text = "Show admin and unrated user content",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(top = 4.dp)
                 )
             }
+
+            // Color filter tabs
+            LazyRow(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                item {
+                    FilterChip(
+                        selected = selectedColor == null,
+                        onClick = { viewModel.setColorFilter(null) },
+                        label = { Text("All") }
+                    )
+                }
+                item {
+                    FilterChip(
+                        selected = selectedColor == "gray",
+                        onClick = { viewModel.setColorFilter("gray") },
+                        label = { Text("Gray") }
+                    )
+                }
+                item {
+                    FilterChip(
+                        selected = selectedColor == "green",
+                        onClick = { viewModel.setColorFilter("green") },
+                        label = { Text("Green") }
+                    )
+                }
+                item {
+                    FilterChip(
+                        selected = selectedColor == "cyan",
+                        onClick = { viewModel.setColorFilter("cyan") },
+                        label = { Text("Cyan") }
+                    )
+                }
+                item {
+                    FilterChip(
+                        selected = selectedColor == "blue",
+                        onClick = { viewModel.setColorFilter("blue") },
+                        label = { Text("Blue") }
+                    )
+                }
+                item {
+                    FilterChip(
+                        selected = selectedColor == "violet",
+                        onClick = { viewModel.setColorFilter("violet") },
+                        label = { Text("Violet") }
+                    )
+                }
+                item {
+                    FilterChip(
+                        selected = selectedColor == "yellow",
+                        onClick = { viewModel.setColorFilter("yellow") },
+                        label = { Text("Yellow") }
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             SwipeRefresh(
                 state = swipeRefreshState,

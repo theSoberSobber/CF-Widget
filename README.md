@@ -18,23 +18,6 @@ A beautiful Material 3 Android app that shows recent  blog posts. Features a hom
 
 ## Screenshots
 
-### App Screenshots
-
-<div align="center">
-  <table>
-    <tr>
-      <td align="center">
-        <h3>Light Mode</h3>
-        <img src="screenshots/app_light_new.jpeg" alt="App Light Mode" width="300"/>
-      </td>
-      <td align="center">
-        <h3>Dark Mode</h3>
-        <img src="screenshots/app_dark_new.jpeg" alt="App Dark Mode" width="300"/>
-      </td>
-    </tr>
-  </table>
-</div>
-
 ### Widget Screenshots
 
 <div align="center">
@@ -47,6 +30,23 @@ A beautiful Material 3 Android app that shows recent  blog posts. Features a hom
       <td align="center">
         <h3>Dark Mode</h3>
         <img src="screenshots/widget_dark.jpeg" alt="Widget Dark Mode" width="300"/>
+      </td>
+    </tr>
+  </table>
+</div>
+
+### App Screenshots
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <h3>Light Mode</h3>
+        <img src="screenshots/app_light_new.jpeg" alt="App Light Mode" width="300"/>
+      </td>
+      <td align="center">
+        <h3>Dark Mode</h3>
+        <img src="screenshots/app_dark_new.jpeg" alt="App Dark Mode" width="300"/>
       </td>
     </tr>
   </table>
