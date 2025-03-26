@@ -4,14 +4,17 @@ A beautiful Material 3 Android app that shows recent  blog posts. Features a hom
 
 ## Features
 
-- 📱 Beautiful Material 3 UI with light and dark mode support
-- 🎯 Home screen widget for quick access to recent content
-- 🔄 Auto-updates every 30 minutes
-- 🔄 Pull-to-refresh functionality
-- 🔗 Direct URL handling for Codeforces links
-- 📊 Filtered mode to show only quality content
-- 💾 Offline support
-- 🌙 Dark mode support
+- 📱 Real-time Updates: Get instant notifications for new Codeforces blogs
+- 🔍 Smart Filtering: 
+  - LLM-based filtered mode to show only quality content
+  - Filter blogs by user rating (gray, green, cyan, blue, violet, yellow)
+  - Toggle for unrated/announcement content
+- 📊 Widget Support: Add a home screen widget to monitor blogs
+- 🌙 Dark Mode: Full support for system dark mode
+- 💾 Offline Support: View previously loaded blogs without internet
+- 🎨 Material You: Follows system theme colors
+- 🔄 Background Updates: Automatically refreshes content
+- 📖 Open Source: Free and open source on GitHub
 
 ## Screenshots
 
@@ -22,11 +25,11 @@ A beautiful Material 3 Android app that shows recent  blog posts. Features a hom
     <tr>
       <td align="center">
         <h3>Light Mode</h3>
-        <img src="screenshots/app_light.jpeg" alt="App Light Mode" width="300"/>
+        <img src="screenshots/app_light_new.jpeg" alt="App Light Mode" width="300"/>
       </td>
       <td align="center">
         <h3>Dark Mode</h3>
-        <img src="screenshots/app_dark.jpeg" alt="App Dark Mode" width="300"/>
+        <img src="screenshots/app_dark_new.jpeg" alt="App Dark Mode" width="300"/>
       </td>
     </tr>
   </table>
