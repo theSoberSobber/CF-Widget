@@ -13,22 +13,22 @@ jobs:
 
       - name: Remove Everything Except App, Screenshots, README, and LICENSE
         run: |
-          shopt -s extglob  # Enable pattern matching
+          shopt -s extglob  # Enable advanced pattern matching
           
           # Move required files to a safe location
           mkdir /tmp/keep
           mv app screenshots README.md LICENSE /tmp/keep/ 2>/dev/null || true
           
-          # Delete everything in the repo
-          rm -rf * .[^.]* 2>/dev/null || true
-          
+          # Remove everything except the .git folder
+          find . -mindepth 1 -maxdepth 1 ! -name ".git" -exec rm -rf {} +
+
           # Move app contents to root
           mv /tmp/keep/app/* /tmp/keep/app/.* . 2>/dev/null || true
           
           # Restore screenshots, README.md, and LICENSE
           mv /tmp/keep/screenshots /tmp/keep/README.md /tmp/keep/LICENSE . 2>/dev/null || true
           
-          # Remove temporary app folder
+          # Remove the now-empty app folder
           rm -rf /tmp/keep/app /tmp/keep
 
       - name: Commit and Push to fdroid Branch
