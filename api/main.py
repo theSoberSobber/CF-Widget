@@ -17,10 +17,18 @@ cached_data = None
 cached_filtered_data = None  # Cache for filtered data
 update_lock = asyncio.Lock()
 
-model = {
-    "name": "llama3.2",
-    "parameters": "3b"
+model_dict = {
+    "llama": {
+        "name": "llama3.2",
+        "parameters": "3b"
+    },
+    "qwen": {
+        "name": "qwen2.5",
+        "parameters": "1.5b-instruct"
+    }
 }
+
+model = model_dict["qwen"]
 
 ollama_identifier = f"{model["name"]}:{model["parameters"]}"
 
